@@ -5,6 +5,6 @@ const userRouter = Router();
 
 userRouter.post("/", createUser);
 userRouter.get("/", getUsers);
-userRouter.get("/:username", getUser);
+userRouter.get("/:id", getUser);
 
 export default userRouter;

@@ -18,6 +18,6 @@ const postSchema:Schema<IPost> = new Schema<IPost>({
   
 })
 
-const todoModel:mongoose.Model<IPost> = mongoose.model<IPost>("posts", postSchema)
+const postModel:mongoose.Model<IPost> = mongoose.model<IPost>("posts", postSchema)
 
-export default todoModel;
+export default postModel;
