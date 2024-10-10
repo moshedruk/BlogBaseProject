@@ -1,5 +1,5 @@
 
-
+import postModel from "../models/postModel";
 
 export const CreateNewPost = async(newPost:any) => {
     try {
@@ -31,7 +31,7 @@ export const GetAllPost = async() => {
     }
 }
 
-export const GetPostById = async() => {
+export const GetPostById = async(id:string) => {
     try {
         
     } catch (err) {
