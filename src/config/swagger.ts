@@ -11,14 +11,9 @@ const options: swaggerJsdoc.Options = {
     },
   },
   
-  apis: ['C:/Users/רובי/Desktop/practice/dist/src/router/*.js'], // Path to your API routes
+  apis: ['C:/Users/רובי/Desktop/משה/posters/dist/routes/*.js'], // Path to your API routes
 };
 
  export const specs = swaggerJsdoc(options);
 
  export default swaggerUi
-
-// module.exports = {
-//   specs,
-//   swaggerUi,
-// };
