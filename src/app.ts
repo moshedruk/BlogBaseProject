@@ -2,6 +2,7 @@ import express from "express";
 import  "dotenv/config";
 import postRouter from "./routes/postRoutes";
 import userRouter from "./routes/userRoutes";
+import authRouter from "./routes/authRouter";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/db";
 
@@ -18,6 +19,7 @@ connectDB();
 // Routes
 app.use("/api/posts", postRouter);
 app.use("/api/users", userRouter);
+app.use("/api/auth/", authRouter);
 
 
 // Error handling middleware
