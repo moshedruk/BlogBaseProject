@@ -1,4 +1,4 @@
-import express from "express";
+import express,{Express} from "express";
 import  "dotenv/config";
 import postRouter from "./routes/postRoutes";
 import userRouter from "./routes/userRoutes";
@@ -8,8 +8,8 @@ import connectDB from "./config/db";
 
 
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app:Express = express();
+const PORT:string | number = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
