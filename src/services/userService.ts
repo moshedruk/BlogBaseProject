@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import bcrypt from "bcrypt";
 import userModel from "../models/userModel";
-=======
-import userModel from "../models/userModel"
-
->>>>>>> 7551cd77b7d8726644c5c6b9f5706e0ce6c9a896
 
 export const CreateNewuser = async(newUser:any) => {
     try {        
