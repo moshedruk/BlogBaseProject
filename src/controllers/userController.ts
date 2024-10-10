@@ -4,7 +4,7 @@ import { CreateNewuser ,GetUserById,GetAllUser} from "../services/userService";
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const newUser = await CreateNewuser()
+        const newUser = await CreateNewuser(req.body)
       } catch (error) {
         
       }

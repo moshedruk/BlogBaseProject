@@ -10,9 +10,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetUserById = exports.GetAllUser = exports.CreateNewuser = void 0;
-const CreateNewuser = () => __awaiter(void 0, void 0, void 0, function* () { });
+const CreateNewuser = (newUser) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { username, email, profile } = newUser;
+        const dbUser = new userModel({
+            username,
+            email,
+            profile
+        });
+        yield dbUser.save();
+    }
+    catch (err) {
+        console.error(err);
+        throw err;
+    }
+});
 exports.CreateNewuser = CreateNewuser;
-const GetAllUser = () => __awaiter(void 0, void 0, void 0, function* () { });
+const GetAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield userModel.find({});
+        return users;
+    }
+    catch (err) {
+        console.error(err);
+        throw err;
+    }
+});
 exports.GetAllUser = GetAllUser;
-const GetUserById = () => __awaiter(void 0, void 0, void 0, function* () { });
+const GetUserById = (myuser) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield userModel.findOne({ _id: myuser.id });
+    }
+    catch (err) {
+        console.error(err);
+        throw err;
+    }
+});
 exports.GetUserById = GetUserById;

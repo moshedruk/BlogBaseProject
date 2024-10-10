@@ -13,7 +13,7 @@ exports.getUser = exports.getUsers = exports.createUser = void 0;
 const userService_1 = require("../services/userService");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newUser = yield (0, userService_1.CreateNewuser)();
+        const newUser = yield (0, userService_1.CreateNewuser)(req.body);
     }
     catch (error) {
     }
