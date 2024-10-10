@@ -11,7 +11,12 @@ const userSchema:Schema<IUser> = new Schema<IUser>({
         unique:true,
         minlength: 5,
         maxlength: 10
-
+    },
+    password: {
+       type: String,
+        required: true,
+        minlength: 8,
+        select: false
     },
     email: {
         type: String,
