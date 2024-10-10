@@ -10,15 +10,58 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddCommentForPost = exports.UpdetePost = exports.GetPostById = exports.GetAllPost = exports.DeletePost = exports.CreateNewPost = void 0;
-const CreateNewPost = () => __awaiter(void 0, void 0, void 0, function* () { });
+const CreateNewPost = (newPost) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { title, content, author } = newPost;
+        const dbpost = new postModel({
+            title,
+            content,
+            author
+        });
+        yield dbpost.save();
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.CreateNewPost = CreateNewPost;
-const DeletePost = () => __awaiter(void 0, void 0, void 0, function* () { });
+const DeletePost = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.DeletePost = DeletePost;
-const GetAllPost = () => __awaiter(void 0, void 0, void 0, function* () { });
+const GetAllPost = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.GetAllPost = GetAllPost;
-const GetPostById = () => __awaiter(void 0, void 0, void 0, function* () { });
+const GetPostById = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.GetPostById = GetPostById;
-const UpdetePost = () => __awaiter(void 0, void 0, void 0, function* () { });
+const UpdetePost = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.UpdetePost = UpdetePost;
-const AddCommentForPost = () => __awaiter(void 0, void 0, void 0, function* () { });
+const AddCommentForPost = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.AddCommentForPost = AddCommentForPost;
