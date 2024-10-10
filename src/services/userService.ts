@@ -1,10 +1,14 @@
-
+import bcrypt from "bcrypt";
+import userModel from "../models/userModel";
 
 export const CreateNewuser = async(newUser:any) => {
     try {        
-        const {username,email,profile} = newUser
+        const {username,email,profile,password} = newUser
+        // Hash password before storing
+        const hashedPassword = await bcrypt.hash(password, 10)
         const dbUser = new userModel({
             username,
+            password: hashedPassword,
             email,
             profile
         })
