@@ -10,10 +10,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = exports.getUsers = exports.createUser = void 0;
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+const userService_1 = require("../services/userService");
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const newUser = yield (0, userService_1.CreateNewuser)();
+    }
+    catch (error) {
+    }
+});
 exports.createUser = createUser;
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+// Get all users
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield (0, userService_1.GetAllUser)();
+    }
+    catch (error) {
+    }
+});
 exports.getUsers = getUsers;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+// Get a single user by ID
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield (0, userService_1.GetUserById)();
+    }
+    catch (error) {
+    }
+});
 exports.getUser = getUser;
 // Optionally, add DELETE and EDIT functions
