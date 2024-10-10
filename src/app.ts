@@ -5,6 +5,7 @@ import userRouter from "./routes/userRoutes";
 import authRouter from "./routes/authRouter";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/db";
+import swaggerUi,{specs} from "./config/swagger";
 
 
 
@@ -20,6 +21,7 @@ connectDB();
 app.use("/api/posts", postRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth/", authRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 // Error handling middleware
