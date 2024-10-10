@@ -21,7 +21,7 @@ const userSchema:Schema<IUser> = new Schema<IUser>({
     },
     profile:{
       bio:{type: String, required: true},
-      socialLinks:{type: String}
+      socialLinks:[{type: String}]
 
     },
     posts:[{type:Types.ObjectId,ref:"posts"}]

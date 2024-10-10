@@ -1,3 +1,4 @@
+import userModel from "../models/userModel"
 
 
 export const CreateNewuser = async(newUser:any) => {
@@ -9,6 +10,7 @@ export const CreateNewuser = async(newUser:any) => {
             profile
         })
         await dbUser.save()
+        return dbUser
     }catch (err) {
         console.error(err)
         throw err        
@@ -28,7 +30,8 @@ export const GetAllUser = async() => {
 
 export const GetUserById = async(myuser:any) => {
     try {
-        const user = await userModel.findOne({_id:myuser.id})
+        const user = await userModel.findOne({_id:myuser})
+        return user
     } catch (err) {
         console.error(err)
         throw err        

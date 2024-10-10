@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import Post from "../models/postModel";
 import User from "../models/userModel";
-import { CreateNewPost ,DeletePost,GetAllPost,GetPostById,UpdetePost,AddCommentForPost} from "../services/postService";
+import { CreateNewPost ,DeletePost,GetAllPost,GetPostById,UpdatePost,AddCommentForPost} from "../services/postService";
 
 // Create a new post
 export const createPost = async (
@@ -11,8 +11,9 @@ export const createPost = async (
 ): Promise<void> => {
   try {
     const newPost = await CreateNewPost(req.body)
-  } catch (error) {
-    
+    res.status(201).json(newPost);
+  } catch (err) {
+    res.status(401).json({err})
   }
 };
 
@@ -23,9 +24,10 @@ export const deletePost = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const Postdelet = await DeletePost()
-  } catch (error) {
-    
+    const Postdelet = await DeletePost(req.params.id)
+    res.status(200).json(Postdelet);
+  } catch (err) {
+    res.status(401).json({err})
   }
 };
 
@@ -39,8 +41,9 @@ export const getPosts = async (
 ): Promise<void> => {
   try {
     const allPost = await GetAllPost()
-  } catch (error) {
-    
+    res.status(200).json(allPost);
+  } catch (err) {
+    res.status(401).json({err})
   }
 };
 
@@ -52,9 +55,10 @@ export const getPost = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const getPostById = await GetPostById()
-  } catch (error) {
-    
+    const getPostById = await GetPostById(req.params.id)
+    res.status(200).json(getPostById);
+  } catch (err) {
+    res.status(401).json({err})    
   }
 };
 
@@ -66,13 +70,13 @@ export const updatePost = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const updatePost = await UpdetePost()
-  } catch (error) {
+    const updatePost = await UpdatePost(req.params.id,req.body)
     
+    res.status(200).json(updatePost);
+  } catch (err) {
+    res.status(401).json({err})   
   }
 };
-
-
 // Add a comment to a post
 export const addComment = async (
   req: Request,
@@ -80,9 +84,10 @@ export const addComment = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newComment = await AddCommentForPost()
-  } catch (error) {
-    
+    const newComment = await AddCommentForPost(req.params.id,req.params.idpost,req.body)
+    res.status(201).json(newComment);
+  } catch (err) {
+    res.status(401).json({err})    
   }
 };
 

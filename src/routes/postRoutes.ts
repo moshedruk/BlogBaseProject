@@ -15,6 +15,6 @@ postRouter.get("/", getPosts);
 postRouter.get("/:id", getPost);
 postRouter.put("/:id", updatePost);
 postRouter.delete("/:id", deletePost);
-postRouter.post("/:id/comments", addComment);
+postRouter.post("/:id/:idpost/comments", addComment);
 
 export default postRouter;
