@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { NextFunction, Router } from "express";
 import {
   createPost,
   getPosts,
@@ -7,14 +7,15 @@ import {
   deletePost,
   addComment,
 } from "../controllers/postController";
+import verifyUser from "../middleware/verifiyd";
 
 const postRouter = Router();
 
-postRouter.post("/", createPost);
-postRouter.get("/", getPosts);
-postRouter.get("/:id", getPost);
-postRouter.put("/:id", updatePost);
-postRouter.delete("/:id", deletePost);
-postRouter.post("/:id/comments", addComment);
+postRouter.post("/",verifyUser, createPost);
+postRouter.get("/",verifyUser, getPosts);
+postRouter.get("/:id",verifyUser, getPost as unknown as NextFunction);
+postRouter.put("/:id",verifyUser, updatePost);
+postRouter.delete("/:id",verifyUser, deletePost);
+postRouter.post("/:id/comments",verifyUser, addComment);
 
 export default postRouter;
