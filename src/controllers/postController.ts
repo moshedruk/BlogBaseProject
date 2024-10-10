@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Post, { IPost } from "../models/postModel";
+import Post from "../models/postModel";
 import User from "../models/userModel";
 import { CreateNewPost ,DeletePost,GetAllPost,GetPostById,UpdetePost,AddCommentForPost} from "../services/postService";
 
@@ -10,7 +10,7 @@ export const createPost = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newPost = await CreateNewPost()
+    const newPost = await CreateNewPost(req.body)
   } catch (error) {
     
   }

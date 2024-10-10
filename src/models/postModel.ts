@@ -1,20 +1,23 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
-
-export interface IComment {
-  content: string;
-  author: Types.ObjectId;
-  createdAt: Date;
-}
-
-export interface IPost extends Document {
-  _id: Types.ObjectId;
-  title: string;
-  content: string;
-  author: Types.ObjectId;
-  comments: IComment[];
-}
-
-const CommentSchema = new Schema<IComment>({});
+import mongoose, { Schema, Types } from "mongoose";
+import { IPost } from "../interfaces/Ipost";
+import { commentSchema } from "../interfaces/Icomment";
 
 
-export default mongoose.model<IPost>("Post", PostSchema);
+const postSchema:Schema<IPost> = new Schema<IPost>({
+  title: {
+      type: String,
+      required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  author: [{type:Types.ObjectId,fef:"users"}],
+  comments:[commentSchema]
+},{
+  
+})
+
+const todoModel:mongoose.Model<IPost> = mongoose.model<IPost>("posts", postSchema)
+
+export default todoModel;
