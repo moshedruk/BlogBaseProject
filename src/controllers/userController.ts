@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/userModel";
 import { CreateNewuser ,GetUserById,GetAllUser} from "../services/userService";
+import RequestWithUser from "../interfaces/requestWithUser";
 
 export const createUser = async (req: Request, res: Response) => {
     try {
@@ -21,9 +22,9 @@ export const getUsers = async (req: Request, res: Response) => {
       }
 };
 // Get a single user by ID
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: RequestWithUser, res: Response) => {
     try {
-        const user = await GetUserById(req.params.id)
+        const user = await GetUserById(req.user.id)
         res.status(200).json(user);
       } catch (err) {
         res.status(401).json({err})
