@@ -5,9 +5,9 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Todos',
+      title: 'Blog',
       version: '1.0.0',
-      description: 'A swagger for todos mengement ',
+      description: 'A swagger for blogs ',
     },
   },
   
@@ -17,3 +17,4 @@ const options: swaggerJsdoc.Options = {
  export const specs = swaggerJsdoc(options);
 
  export default swaggerUi
+
