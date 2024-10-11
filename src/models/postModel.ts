@@ -12,7 +12,7 @@ const postSchema:Schema<IPost> = new Schema<IPost>({
     type: String,
     required: true,
   },
-  author: [{type:Types.ObjectId,fef:"users"}],
+  author: [{type:Types.ObjectId,ref:"users"}],
   comments:[commentSchema]
 },{
   
