@@ -1,25 +1,89 @@
+import mongoose from "mongoose";
 import { IComment } from "../interfaces/Icomment"
 import postModel from "../models/postModel"
 import userModel from "../models/userModel"
 
 
-export const CreateNewPost = async(newPost:any) => {
+// export const CreateNewPost = async(newPost:any,id:string) => {
+//     try {
+//         const {title,content,author} = newPost
+//         const dbpost = new postModel({
+//             title,
+//             content,
+//             author:id
+//         })      
+//         await dbpost.save() 
+//         await userModel.updateOne(
+//             { _id: author },
+//             { $addToSet: { posts: dbpost._id } })
+//         return dbpost            
+//     } catch (err) {
+//         throw err
+//     }
+// }
+// export const CreateNewPost = async (newPost: any, id: string) => {
+//     try {
+//         const userId =  new mongoose.Types.ObjectId(id);
+//         const { title, content, author } = newPost;
+//         const dbpost = new postModel({
+//             title,
+//             content,
+//             author: userId
+//         });
+
+//         await dbpost.save();
+//         console.log("Post saved:", dbpost);
+
+//         const updateResult = await userModel.updateOne(
+//             { _id: author},
+//             { $addToSet: { posts: dbpost._id } }
+//         );
+
+//         console.log("User updated:", updateResult);
+//         return dbpost;            
+//     } catch (err) {
+//         console.error("Error creating post:", err);
+//         throw err;
+//     }
+// }
+
+
+export const CreateNewPost = async (newPost: any, author: string) => {
     try {
-        const {title,content,author} = newPost
+        const { title, content } = newPost;
+
         const dbpost = new postModel({
             title,
             content,
             author
-        })      
-        await dbpost.save() 
-        await userModel.updateOne(
-            { _id: author },
-            { $addToSet: { posts: dbpost._id } })
-        return dbpost            
+        });
+
+        await dbpost.save();
+
+        // המרת ה-ID לאובייקט של Mongoose
+        const userId = new mongoose.Types.ObjectId(author); 
+
+        const updateResult = await userModel.updateOne(
+            { _id: userId },
+            { $addToSet: { posts: dbpost._id } }
+        );
+
+        console.log("User update result:", updateResult);
+        if (updateResult.matchedCount === 0) {
+            console.warn("No user found with the given ID.");
+        }
+        if (updateResult.modifiedCount === 0) {
+            console.warn("No changes made to the user.");
+        }
+
+        return dbpost;            
     } catch (err) {
-        throw err
+        console.error("Error creating post:", err);
+        throw err;
     }
-}
+};
+
+
 
 export const DeletePost = async(id:any) => {
     try {

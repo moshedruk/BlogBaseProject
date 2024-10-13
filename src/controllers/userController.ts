@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import User from "../models/userModel";
-import { CreateNewuser ,GetUserById,GetAllUser} from "../services/userService";
+import { CreateNewUser ,GetUserById,GetAllUser} from "../services/userService";
 import RequestWithUser from "../interfaces/requestWithUser";
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const newUser = await CreateNewuser(req.body)
+        const newUser = await CreateNewUser(req.body)
         res.status(201).json(newUser);
       } catch (err) {
         res.status(500).json({ err: err})
-        
+         
       }
 };
 // Get all users

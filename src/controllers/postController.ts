@@ -6,12 +6,12 @@ import RequestWithUser from "../interfaces/requestWithUser";
 
 // Create a new post
 export const createPost = async (
-  req: Request,
+  req: RequestWithUser,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newPost = await CreateNewPost(req.body)
+    const newPost = await CreateNewPost(req.body,req.user.id as any)
     res.status(201).json(newPost);
   } catch (err) {
     res.status(401).json({err})

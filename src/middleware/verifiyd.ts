@@ -11,8 +11,17 @@ const verifyUser = async (
     next: NextFunction
 ) => {
     try { 
-         const tokenFromLocalStorage:string = JSON.stringify(localStorage.getItem("token"))   
-        const token: string = tokenFromLocalStorage
+        const token:string =req.cookies.login_token || req.headers["token"];
+        if (!token) {
+            res.status(401).json({
+                err: true,
+                message: "Token is missing, please log in again",
+                data: null
+            })
+            return
+        }
+
+        console.log(token);
         const payload: TokenPayloadDTO = jwt.verify(token, process.env.TOKEN_SECRET as string) as TokenPayloadDTO
         (req as RequestWithUser).user = payload
         next()
@@ -28,6 +37,7 @@ const verifyUser = async (
                 err: true,
                 message: "Token is missing or curropted",
                 data: err
+                
             })
         }
     }

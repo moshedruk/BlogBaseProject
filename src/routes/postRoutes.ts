@@ -12,7 +12,7 @@ import verifyUser from "../middleware/verifiyd";
 const postRouter = Router();
 /**
  * @swagger
- * /posts:
+ * /api/posts/:
  *   post:
  *     summary: Create a new post
  *     description: Create a new post in the system.
@@ -79,10 +79,10 @@ const postRouter = Router();
  *         description: Internal server error.
  */
 
-postRouter.post("/",verifyUser, createPost);
+postRouter.post("/",verifyUser, createPost as unknown as NextFunction);
 /**
  * @swagger
- * /posts:
+ * /api/posts:
  *   get:
  *     summary: Retrieve all posts
  *     description: Get a list of all posts in the system.
@@ -131,7 +131,7 @@ postRouter.post("/",verifyUser, createPost);
 postRouter.get("/",verifyUser, getPosts);
 /**
  * @swagger
- * /posts/{id}:
+ * /api/posts/{id}:
  *   get:
  *     summary: Retrieve a single post
  *     description: Get a specific post by its ID.
@@ -185,7 +185,7 @@ postRouter.get("/",verifyUser, getPosts);
 postRouter.get("/:id",verifyUser, getPost as unknown as NextFunction);
 /**
  * @swagger
- * /posts/{id}:
+ * /api/posts/{id}:
  *   put:
  *     summary: Update a post
  *     description: Update an existing post by its ID.
@@ -233,7 +233,7 @@ postRouter.get("/:id",verifyUser, getPost as unknown as NextFunction);
 postRouter.put("/:id",verifyUser, updatePost);
 /**
  * @swagger
- * /posts/{id}:
+ * /api/posts/{id}:
  *   delete:
  *     summary: Delete a post
  *     description: Delete a specific post by its ID.
@@ -266,7 +266,7 @@ postRouter.put("/:id",verifyUser, updatePost);
 postRouter.delete("/:id",verifyUser, deletePost);
 /**
  * @swagger
- * /posts/{id}/comments:
+ * /api/posts/{id}/comments:
  *   post:
  *     summary: Add a comment to a post
  *     description: Add a new comment to a specific post by its ID.

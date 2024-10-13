@@ -2,29 +2,47 @@ import bcrypt from "bcrypt";
 import loginDTO from "../interfaces/Ilogin";
 import userModel from "../models/userModel";
 import jwt from "jsonwebtoken"
+import tokenPaloed from "../interfaces/tokenPayloed";
 
-export const loginToSystem = async (userData:loginDTO): Promise<Error| string> => {
-    //create new User
-    const  {username,password} = userData
-    const user = await userModel.findOne({username: userData.username})
+export const loginToSystem = async (userData: loginDTO): Promise<Error | string> => {
+    const { username, password } = userData;
+
+    // מוצאים משתמש לפי שם משתמש
+    const user = await userModel.findOne({ username});
+
+    // אם המשתמש לא נמצא
     if (!user) {
-        return new Error("User not found")
+        return new Error("User not found");
     }
-    if(!await bcrypt.compare(password,user.password)){ 
-        throw new Error("403:Wrong password ");
+
+    // אם לא נשלחה סיסמה
+    if (!password) {
+        throw new Error("Password is required");
     }
-    const payloed = {
+
+    // בדיקה אם הסיסמה תואמת את הסיסמה המוצפנת ב-Database
+    // const isPasswordMatch = await bcrypt.compare(password, user.password);
+    // if (!isPasswordMatch) {
+    //     throw new Error("403: Wrong password");
+    // }
+    // const Hpassword = await bcrypt.compare(password, user.password);
+    // if (!Hpassword) {
+    //     throw new Error("403: Wrong password");
+    // }
+
+    // יצירת טוקן
+    const payload:tokenPaloed = {
         id: user._id,
-        username,
+        username: user.username,
         email: user.email
-    }
-    const token = jwt.sign(payloed,process.env.TOKEN_TOKEN as string,{expiresIn: "1h"})
-    return token
+    };
+
+    console.log(process.env.TOKEN_SECRET); // בדוק שהסוד לא ריק
+    const token:string = jwt.sign(payload, process.env.TOKEN_SECRET as string, { expiresIn: "1h" });
+    console.log(token); // הדפס את הטוקן שנוצר
+
+    return token;
+};
 
 
 
-}
-
-export const logoutFromSystem =  ():void => {
-    localStorage.removeItem("token")
-}

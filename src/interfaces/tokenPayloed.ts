@@ -1,7 +1,7 @@
+import { Types } from "mongoose"
+
 export default interface payloedDTO{
  username : string
- id : string
- avatarUrl :string
+ id : Types.ObjectId
  email :string
- isLockedAccount :string
 }

@@ -4,17 +4,19 @@ import { login, logout } from "../controllers/authController";
 const authRouter = Router();
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Login to the system.
  *     description: Login to the system.
+ *     tags:
+ *       - Auth
  *     requestBody:
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               user_name:
+ *               username:
  *                 type: string
  *                 description: The name of the user.
  *               password:
@@ -37,10 +39,12 @@ const authRouter = Router();
 authRouter.post("/login",login)
 /**
  * @swagger
- * /auth/logout:
+ * /api/auth/logout:
  *   delete:
  *     summary: Logout from system.
  *     description: Logout from system.
+ *     tags:
+ *       - Auth
  *     responses:
  *       '200':
  *         description: A successful response

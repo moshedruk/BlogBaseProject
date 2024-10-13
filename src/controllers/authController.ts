@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import loginDTO from "../interfaces/Ilogin";
-import { loginToSystem, logoutFromSystem } from "../services/authService";
+import { loginToSystem} from "../services/authService";
 
 
 export const login = async (
@@ -9,17 +9,18 @@ export const login = async (
   ): Promise<void> => {
     try {
       const token = await loginToSystem(req.body)
-      localStorage.setItem("token", token as string)
-      res.status(200).json({ token });
+      res.cookie("login_token", token)
+      res.status(200).json({token: token.toString()});
+      
 
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      res.status(500).json({ msg: error.message});
     }
   };
 
   export const logout = async (req: Request, res: Response):Promise<void> => {
     try {
-      await logoutFromSystem();
+      res.clearCookie("token");
       res.status(200).json({ message: "Logged out successfully" });
     }catch (err) {
     res.status(500).json({ err });

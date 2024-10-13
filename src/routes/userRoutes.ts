@@ -5,10 +5,12 @@ import verifyUser from '../middleware/verifiyd';
 const userRouter = Router();
 /**
  * @swagger
- * /user:
+ * /api/users:
  *   post:
  *     summary: Register to the system.
  *     description: Register to the system.
+ *     tags:
+ *       - Users
  *     requestBody:
  *       content:
  *         application/json:
@@ -63,7 +65,7 @@ const userRouter = Router();
 userRouter.post('/', createUser);
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     summary: Get all users
  *     description: Retrieve a list of all users from the system.
@@ -112,7 +114,7 @@ userRouter.post('/', createUser);
 userRouter.get('/', getUsers);
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   get:
  *     summary: Get a user by ID
  *     description: Retrieve a single user from the system using their ID.

@@ -1,24 +1,38 @@
 import bcrypt from "bcrypt";
-import userModel from "../models/userModel";
+import userModel from "../models/userModel";  // ודא שזה הנתיב הנכון למודל
 
-export const CreateNewuser = async(newUser:any) => {
-    try {        
-        const {username,email,profile,password} = newUser
-        // Hash password before storing
-        const hashedPassword = await bcrypt.hash(password, 10)
+export const CreateNewUser = async (newUser: any) => {
+    try {
+        const { username, email, profile, password } = newUser;
+
+        // בדוק שכל השדות הנדרשים קיימים
+        if (!username || !email || !password) {
+            throw new Error("Missing required fields: username, email, or password.");
+        }
+
+        // הצפנת הסיסמה לפני השמירה
+        // const hashedPassword = await bcrypt.hash(password, 10);
+        // const hash = await bcrypt.hash(password, 10);
+        
+        // יצירת אובייקט המשתמש עם סיסמה מוצפנת
         const dbUser = new userModel({
             username,
-            password: hashedPassword,
+            password: password,
             email,
             profile
-        })
-        await dbUser.save()
-        return dbUser
-    }catch (err) {
-        console.error(err)
-        throw err        
+        });
+
+        // שמירת המשתמש ב-Database
+        await dbUser.save();
+        
+        // החזרת המשתמש שנוצר
+        return dbUser;
+    } catch (err) {
+        console.error("Error creating user:", err);
+        throw err;  // החזר את השגיאה כדי שהקריאה החיצונית תדע מה קרה
     }
-}
+};
+
 
 
 export const GetAllUser = async() => {
