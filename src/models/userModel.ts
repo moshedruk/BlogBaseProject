@@ -16,7 +16,6 @@ const userSchema:Schema<IUser> = new Schema<IUser>({
        type: String,
         required: true,
         minlength: 8,
-        select: false
     },
     email: {
         type: String,
@@ -25,7 +24,7 @@ const userSchema:Schema<IUser> = new Schema<IUser>({
         validate: [validator.isEmail, "Invalid email address"]
     },
     profile:{
-      bio:{type: String, required: true},
+      bio:{type: String},
       socialLinks:[{type: String}]
 
     },
