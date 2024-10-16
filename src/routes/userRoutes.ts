@@ -8,10 +8,11 @@ const userRouter = Router();
  * /api/users:
  *   post:
  *     summary: Register to the system.
- *     description: Register to the system.
+ *     description: Register a new user to the system.
  *     tags:
  *       - Users
  *     requestBody:
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
@@ -20,47 +21,60 @@ const userRouter = Router();
  *               username:
  *                 type: string
  *                 description: The name of the user.
+ *                 example: "john_doe"
  *               password:
  *                 type: string
  *                 description: The password of the user.
+ *                 example: "password123"
  *               email:
  *                 type: string
  *                 description: The email of the user.
+ *                 example: "joon@abstract.com"
  *               profile:
  *                 type: object
  *                 properties:
  *                   bio:
  *                     type: string
- *                     description: The bio of the user.
+ *                     description: A brief bio of the user.
+ *                     example: "A passionate blogger."
  *                   socialLinks:
  *                     type: array
  *                     items:
  *                       type: string
- *                     description: The social links of the user.
+ *                     description: List of social media links of the user.
+ *                     example: ["https://twitter.com/john_doe"]
  *               posts:
  *                 type: array
  *                 items:
  *                   type: string
  *                 description: Array of post references.
- *     examples:
- *       example1:
- *         summary: Example user data.
- *         value:
- *           username: "john_doe"
- *           password: "password123"
- *           email: "joon@abstract.com"
- *           profile:
- *             bio: "good"
- *             socialLinks: ["twitterLink"]
- *           posts: [1, 2, 3]
+ *                 example: ["1", "2", "3"]
  *     responses:
  *       '201':
  *         description: User registered successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: The unique identifier for the user.
+ *                   example: "60c72b2f5f1b2c001c8d4e4b"
+ *                 username:
+ *                   type: string
+ *                   description: The name of the user.
+ *                   example: "john_doe"
+ *                 email:
+ *                   type: string
+ *                   description: The email of the user.
+ *                   example: "joon@abstract.com"
  *       '400':
- *         description: Bad request.
+ *         description: Bad request. Missing or invalid fields.
  *       '500':
  *         description: Internal server error.
  */
+
 
 userRouter.post('/', createUser);
 /**
